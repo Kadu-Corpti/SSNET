@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSNET — Internet Fibra Óptica | Paulínia e Sumaré</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:      #000818;
+      --navy:    #001a45;
+      --blue:    #1155c0;
+      --green:   #00e676;
+      --green-dk:#00c853;
+      --txt:     #e8f4ff;
+      --txt2:    #7ab0d4;
+      --ft:      'Rajdhani', sans-serif;
+      --fb:      'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--txt); font-family: var(--fb); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 62px;
+      background: rgba(0,4,14,.92); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,230,118,.12);
+    }
+    /* Linha verde fina na base da nav */
+    nav::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 35%; height: 1px;
+      background: linear-gradient(90deg, var(--green-dk), transparent);
+    }
+    .logo {
+      font-family: var(--ft); font-size: 1.85rem; font-weight: 700;
+      letter-spacing: .16em; position: relative;
+    }
+    .logo .w { color: #fff; }
+    .logo .g { color: var(--green); }
+    /* Marca de sinal abaixo do logo */
+    .logo::after {
+      content: '';
+      position: absolute; bottom: 1px; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green-dk) 0%, transparent 70%);
+      opacity: .55;
+    }
+    /* Botão WA navbar — canto cortado inferior-direito */
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .48rem 1.2rem .48rem 1rem;
+      background: rgba(0,230,118,.07);
+      border: none;
+      border-left: 2px solid var(--green);
+      border-bottom: 2px solid rgba(0,230,118,.4);
+      color: var(--green); font-size: .84rem; font-weight: 600; letter-spacing: .02em;
+      cursor: pointer; transition: all .2s; position: relative;
+    }
+    .btn-wa::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 8px; height: 8px;
+      border-top: 2px solid var(--green);
+      border-right: 2px solid var(--green);
+    }
+    .btn-wa:hover { background: rgba(0,230,118,.14); }
+    .btn-wa svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      background: radial-gradient(ellipse at 20% 60%, #001030 0%, #000818 55%, #000410 100%);
+      padding-top: 62px;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(17,85,192,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,85,192,.07) 1px, transparent 1px);
+      background-size: 58px 58px;
+      animation: gridMove 30s linear infinite;
+    }
+    @keyframes gridMove { to { background-position: 58px 58px; } }
+    /* Linhas diagonais de fibra óptica */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: repeating-linear-gradient(
+        -52deg, transparent, transparent 90px,
+        rgba(0,230,118,.028) 90px, rgba(0,230,118,.028) 91px
+      );
+    }
+    .glow-orb {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      background: radial-gradient(circle, rgba(17,85,192,.16) 0%, transparent 68%);
+    }
+    .glow-orb.left  { width:700px; height:700px; left:-200px; top:50%; transform:translateY(-50%); }
+    .glow-orb.right { width:500px; height:500px; right:-100px; top:10%; background:radial-gradient(circle,rgba(0,230,118,.08) 0%,transparent 68%); }
+
+    .hero-inner {
+      position: relative; z-index: 10;
+      max-width: 860px; margin: 0 auto; padding: 5rem 2.5rem 5rem;
+      text-align: center;
+    }
+    /* Badge "ao vivo" — barra lateral, não pílula genérica */
+    .live-badge {
+      display: inline-flex; align-items: center; gap: .55rem;
+      padding: .32rem .9rem .32rem .75rem;
+      background: rgba(17,85,192,.1);
+      border-left: 3px solid rgba(17,85,192,.7);
+      font-size: .72rem; font-weight: 700; color: var(--txt2);
+      letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1.6rem;
+    }
+    .dot { width:7px; height:7px; border-radius:50%; background:var(--green); animation: blink 1.6s ease-in-out infinite; flex-shrink:0; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+
+    .hero-h1 {
+      margin-bottom: 1.4rem;
+      line-height: 1;
+    }
+    /* Número enorme — Bebas Neue como outdoor */
+    .h1-num {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(7rem, 18vw, 13rem);
+      font-weight: 400;
+      letter-spacing: .04em;
+      color: #fff;
+      line-height: .88;
+    }
+    /* Unidade pequena em verde, caixa alta leve */
+    .h1-unit {
+      display: block;
+      font-family: var(--fb);
+      font-size: clamp(.85rem, 2vw, 1.1rem);
+      font-weight: 500;
+      color: var(--green);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin: .5rem 0 .9rem;
+    }
+    /* Frase de impacto — DM Sans, peso leve, contraste com o número */
+    .h1-line2 {
+      display: block;
+      font-family: var(--fb);
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      font-weight: 400;
+      color: var(--txt2);
+      line-height: 1.45;
+      letter-spacing: .01em;
+    }
+    .h1-line2 em {
+      font-style: normal;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.1rem); color: var(--txt2);
+      line-height: 1.76; max-width: 560px; margin: 0 auto 1.2rem;
+    }
+    /* Lista de diferenciais */
+    .hero-diferenciais {
+      list-style: none;
+      max-width: 480px; margin: 0 auto 2.4rem;
+      display: flex; flex-direction: column; gap: .55rem;
+      text-align: left;
+    }
+    .hero-diferenciais li {
+      font-size: clamp(.88rem, 1.8vw, .98rem);
+      color: var(--txt2); line-height: 1.5;
+      padding-left: .2rem;
+    }
+    .hero-diferenciais li strong { color: var(--txt); font-weight: 600; }
+    .hd-mark {
+      color: var(--green); font-weight: 700;
+      margin-right: .55rem; font-family: var(--ft);
+      font-size: 1.1em;
+    }
+
+    /* Nota competitiva — barra lateral verde, não card genérico */
+    .hero-edge {
+      display: block; max-width: 500px; margin: 0 auto 2.4rem;
+      padding: .7rem 1.1rem .7rem 1rem;
+      background: rgba(0,230,118,.04);
+      border-left: 3px solid var(--green);
+      font-size: .88rem; color: var(--txt2); line-height: 1.65; text-align: left;
+    }
+    .hero-edge strong { color: var(--green); }
+
+    /* Botão primário — canto superior-direito cortado (identidade SSNET) */
+    .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .55rem;
+      padding: .95rem 2.4rem;
+      background: var(--green-dk); border: none;
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+      color: #000; font-family: var(--fb); font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    /* Efeito de luz passando no hover */
+    .btn-primary::after {
+      content: '';
+      position: absolute; top: 0; left: -80%;
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+      transform: skewX(-18deg);
+      transition: left .45s;
+    }
+    .btn-primary:hover { background: var(--green); box-shadow: 0 4px 28px rgba(0,230,118,.38); }
+    .btn-primary:hover::after { left: 140%; }
+
+    /* Preço — linha inferior, sem card genérico */
+    .price-pill {
+      display: inline-flex; align-items: baseline; gap: .35rem;
+      padding: .4rem .9rem;
+      border-bottom: 2px solid rgba(0,230,118,.45);
+      font-size: .86rem; color: var(--txt2);
+    }
+    .price-pill strong { font-family: var(--ft); font-size: 1.75rem; color: var(--txt); font-weight: 700; line-height:1; }
+    .price-pill em { font-style:normal; font-size:.74rem; color: var(--txt2); }
+
+    .hero-urgency {
+      margin-top: 1.4rem; font-size: .78rem; color: var(--txt2);
+      display: flex; align-items: center; justify-content: center; gap: .45rem;
+      letter-spacing: .04em;
+    }
+    .hero-urgency .dot { background: #ffaa00; animation: blink 1.2s ease-in-out infinite; }
+
+    /* Stats — painel de leitura técnica */
+    .hero-stats {
+      display: flex; margin-top: 2.2rem;
+      border: 1px solid rgba(17,85,192,.22);
+      border-left: 3px solid rgba(0,230,118,.5);
+      overflow: hidden;
+    }
+    .hs {
+      flex: 1; padding: .9rem 1.2rem; text-align: center;
+      border-right: 1px solid rgba(17,85,192,.18);
+      background: rgba(0,10,28,.45);
+      position: relative;
+    }
+    .hs:last-child { border-right: none; }
+    .hs::after {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 28%; height: 2px;
+      background: var(--green); opacity: .5;
+    }
+    .hs-val { font-family: var(--ft); font-size: 1.25rem; font-weight: 700; color: var(--green); letter-spacing: .04em; }
+    .hs-lbl { font-size: .68rem; color: var(--txt2); letter-spacing: .04em; margin-top: .2rem; line-height: 1.4; }
+
+    /* ── COVERAGE MAP ── */
+    #cobertura {
+      position: relative; height: 100vh; min-height: 640px;
+      background: #000d24; overflow: hidden;
+    }
+    #three-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    #label-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+    .map-overlay {
+      position: absolute; bottom: 5.8rem; left: 50%; transform: translateX(-50%);
+      z-index: 10; text-align: center; pointer-events: none;
+    }
+    .map-tag {
+      display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .2em;
+      color: var(--green); text-transform: uppercase; margin-bottom: .5rem;
+    }
+    .map-title {
+      font-family: var(--ft); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700;
+      color: var(--txt); text-shadow: 0 2px 20px rgba(0,0,0,.8);
+    }
+    /* Linha de acento abaixo do título do mapa */
+    .map-title::after {
+      content: '';
+      display: block; width: 36px; height: 2px;
+      background: var(--green); margin: .45rem auto 0;
+    }
+
+    .map-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 10; pointer-events: none; white-space: nowrap;
+      font-size: .76rem; color: var(--txt2); letter-spacing: .06em;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .map-hint::before { content:''; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--green); animation: blink 1.6s ease-in-out infinite; }
+
+    /* Tooltip — barra lateral, sem border-radius genérico */
+    #tooltip {
+      position: fixed; z-index: 999; pointer-events: none;
+      padding: .55rem 1rem .55rem .9rem;
+      background: rgba(0,6,18,.95);
+      border-left: 3px solid var(--green);
+      border-bottom: 1px solid rgba(0,230,118,.25);
+      display: none;
+    }
+    #tooltip .tt-name { font-family: var(--ft); font-size: 1.05rem; font-weight: 700; color: var(--txt); }
+    #tooltip .tt-city { font-size: .73rem; color: var(--txt2); margin-top: .1rem; }
+    #tooltip .tt-cta  { font-size: .7rem; color: var(--green); margin-top: .28rem; font-weight: 600; letter-spacing: .03em; }
+
+    /* ── QUIZ ── */
+    #quiz {
+      background: linear-gradient(180deg, #000d24 0%, #00091c 100%);
+      padding: 4.5rem 2rem;
+      position: relative;
+    }
+    /* Linha de fibra no topo da seção */
+    #quiz::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent 5%, var(--green-dk) 30%, rgba(17,85,192,.8) 70%, transparent 95%);
+    }
+    .quiz-wrap { max-width: 620px; margin: 0 auto; text-align: center; }
+
+    .quiz-tag {
+      display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .2em;
+      color: var(--green); text-transform: uppercase; margin-bottom: .55rem;
+    }
+    .quiz-title {
+      font-family: var(--ft); font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700;
+      color: var(--txt); margin-bottom: .5rem; line-height: 1.15;
+    }
+    .quiz-sub { font-size: .88rem; color: var(--txt2); margin-bottom: 2rem; line-height: 1.65; }
+
+    /* Steps — indicador técnico, não pílulas */
+    .quiz-steps {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; margin-bottom: 1.8rem;
+    }
+    .qs {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .73rem; font-weight: 600; color: rgba(122,176,212,.5);
+      transition: color .2s; letter-spacing: .04em;
+    }
+    .qs.active { color: var(--txt); }
+    .qs.done   { color: rgba(0,230,118,.6); }
+    .qs-num {
+      width: 22px; height: 22px;
+      clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 0 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700;
+      background: rgba(17,85,192,.18); transition: all .2s;
+    }
+    .qs.active .qs-num { background: var(--green-dk); color: #000; }
+    .qs.done   .qs-num { background: rgba(0,200,83,.22); color: var(--green); }
+    .qs-sep { width: 28px; height: 1px; background: rgba(17,85,192,.25); margin: 0 .3rem; flex-shrink: 0; }
+
+    /* Panel — cantos marcados, não glassmorphism genérico */
+    .quiz-panel {
+      background: rgba(0,6,18,.65);
+      border: 1px solid rgba(17,85,192,.2);
+      border-top: 2px solid rgba(0,230,118,.45);
+      padding: 1.8rem;
+      position: relative;
+    }
+    /* Marca de canto inferior-direito */
+    .quiz-panel::after {
+      content: '';
+      position: absolute; bottom: 0; right: 0;
+      width: 18px; height: 18px;
+      border-bottom: 2px solid rgba(0,230,118,.35);
+      border-right: 2px solid rgba(0,230,118,.35);
+    }
+    .quiz-question {
+      font-size: .78rem; font-weight: 700; color: var(--txt2);
+      margin-bottom: 1.2rem; letter-spacing: .1em; text-transform: uppercase;
+    }
+
+    /* Chips — cartão com barra lateral, não pílula */
+    .chip-grid { display: flex; flex-wrap: wrap; gap: .85rem; justify-content: center; }
+    .chip {
+      padding: .68rem 1.2rem .68rem 1rem;
+      background: rgba(5,12,30,.8);
+      border: 1px solid rgba(17,85,192,.2);
+      border-left: 3px solid rgba(17,85,192,.45);
+      color: var(--txt); font-size: .9rem; font-weight: 500;
+      cursor: pointer; transition: all .16s; user-select: none;
+      min-width: 128px; text-align: left; position: relative; overflow: hidden;
+    }
+    /* Fill deslizante no hover */
+    .chip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(17,85,192,.13);
+      transform: translateX(-100%);
+      transition: transform .18s ease;
+    }
+    .chip:hover::before { transform: translateX(0); }
+    .chip:hover { border-left-color: var(--txt2); }
+    .chip.selected {
+      border-left-color: var(--green);
+      border-color: rgba(0,230,118,.3);
+      background: rgba(0,230,118,.06);
+      color: var(--green); font-weight: 600;
+    }
+    .chip.selected::before { transform: translateX(0); background: rgba(0,230,118,.05); }
+
+    /* Resumo final */
+    .quiz-summary {
+      border-left: 3px solid var(--green);
+      background: rgba(0,230,118,.04);
+      padding: .9rem 1rem; margin-bottom: 1.4rem;
+      font-size: .88rem; color: var(--txt); line-height: 1.65; text-align: left;
+    }
+    .quiz-summary strong { color: var(--green); }
+
+    .quiz-nav { display: flex; gap: .75rem; justify-content: center; margin-top: 1.3rem; flex-wrap: wrap; }
+    /* Botão voltar — linha inferior */
+    .btn-back {
+      padding: .58rem 1.3rem;
+      background: transparent;
+      border: none; border-bottom: 2px solid rgba(17,85,192,.35);
+      color: var(--txt2); font-size: .86rem; font-weight: 500;
+      cursor: pointer; transition: all .16s; letter-spacing: .02em;
+    }
+    .btn-back:hover { border-bottom-color: var(--txt2); color: var(--txt); }
+    /* Botão próximo — canto cortado */
+    .btn-next {
+      padding: .58rem 1.5rem;
+      background: rgba(17,85,192,.2);
+      border: 1px solid rgba(17,85,192,.4);
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+      color: var(--txt); font-size: .86rem; font-weight: 600;
+      cursor: pointer; transition: background .16s;
+    }
+    .btn-next:hover:not(:disabled) { background: rgba(17,85,192,.38); }
+    .btn-next:disabled { opacity: .3; cursor: default; }
+    /* Botão WA do quiz — mesmo canto cortado do primário */
+    .btn-wa-quiz {
+      display: inline-flex; align-items: center; gap: .55rem;
+      padding: .9rem 2.2rem;
+      background: var(--green-dk); border: none;
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+      color: #000; font-family: var(--fb); font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background .2s, box-shadow .2s;
+      text-decoration: none; position: relative; overflow: hidden;
+    }
+    .btn-wa-quiz::after {
+      content: '';
+      position: absolute; top: 0; left: -80%;
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+      transform: skewX(-18deg); transition: left .45s;
+    }
+    .btn-wa-quiz:hover { background: var(--green); box-shadow: 0 4px 26px rgba(0,230,118,.38); }
+    .btn-wa-quiz:hover::after { left: 140%; }
+    .btn-wa-quiz svg { width:18px; height:18px; fill:currentColor; flex-shrink:0; }
+
+    /* ── PLANOS ── */
+    #planos {
+      background: #000818;
+      min-height: 100vh;
+      padding: calc(62px + 3.5rem) 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    #planos::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent 5%, var(--green-dk) 30%, rgba(17,85,192,.8) 70%, transparent 95%);
+      z-index: 3;
+    }
+    #planos-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 1; }
+    .planos-inner { max-width: 940px; width: 100%; margin: 0 auto; position: relative; z-index: 2; }
+
+    .section-tag {
+      display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .2em;
+      color: var(--green); text-transform: uppercase; margin-bottom: .55rem;
+    }
+    .section-title {
+      font-family: var(--ft); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700;
+      color: var(--txt); margin-bottom: 2.8rem; line-height: 1.1; text-align: center;
+    }
+    .section-title::after {
+      content: '';
+      display: block; width: 36px; height: 2px;
+      background: var(--green); margin: .5rem auto 0;
+    }
+
+    /* ── PLAN CARD (single, centrado) ── */
+    .plan-card {
+      max-width: 430px;
+      margin: 0 auto;
+      background: rgba(0,4,16,.88);
+      border: 1px solid rgba(17,85,192,.28);
+      border-top: 4px solid var(--green);
+      position: relative;
+      box-shadow: 0 12px 70px rgba(0,0,0,.55), 0 0 50px rgba(0,230,118,.07);
+    }
+    .plan-card::after {
+      content: '';
+      position: absolute; bottom: 0; right: 0;
+      width: 28px; height: 28px;
+      border-bottom: 2px solid rgba(0,230,118,.38);
+      border-right: 2px solid rgba(0,230,118,.38);
+    }
+
+    /* Cabeçalho */
+    .pc-head {
+      padding: 2rem 2rem 1.6rem;
+      background: rgba(0,230,118,.04);
+      border-bottom: 1px solid rgba(17,85,192,.18);
+      text-align: center;
+    }
+    .pc-headline { display: flex; align-items: flex-end; justify-content: center; gap: .3rem; line-height: 1; }
+    .pc-mega {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 14vw, 7.5rem);
+      line-height: .85; color: var(--green); letter-spacing: .04em;
+    }
+    .pc-unit {
+      font-family: var(--ft); font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700; color: #fff; letter-spacing: .1em;
+      padding-bottom: .6rem;
+    }
+    .pc-sub {
+      font-size: .7rem; font-weight: 700; color: var(--txt2);
+      letter-spacing: .14em; text-transform: uppercase; margin-top: .55rem;
+    }
+
+    /* Lista de features */
+    .pc-feats {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(17,85,192,.18);
+      display: flex; flex-direction: column; gap: .7rem;
+    }
+    .pc-feat {
+      display: flex; align-items: center; gap: .7rem;
+      font-size: .88rem; color: var(--txt2); line-height: 1.35;
+    }
+    .pc-fi {
+      display: flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; flex-shrink: 0;
+      clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 0 100%);
+      background: rgba(0,230,118,.1);
+      color: var(--green); font-size: .65rem; font-weight: 800; font-style: normal;
+    }
+    .pc-feat.hi .pc-fi { background: rgba(0,230,118,.2); }
+    .pc-feat strong { color: var(--txt); font-weight: 600; }
+
+    /* Bloco de preço */
+    .pc-price {
+      padding: 1.6rem 2rem;
+      border-bottom: 1px solid rgba(17,85,192,.18);
+      text-align: center;
+    }
+    .pc-pfrom { font-size: .76rem; color: var(--txt2); display: block; margin-bottom: .15rem; }
+    .pc-pval {
+      font-family: var(--ft); font-size: 3.4rem; font-weight: 700;
+      color: var(--txt); line-height: 1; letter-spacing: .02em;
+    }
+    .pc-pval em { font-style: normal; font-size: 2rem; color: var(--txt2); }
+    .pc-pmo { font-size: .8rem; color: var(--txt2); display: block; margin-top: .2rem; }
+    .pc-pnote {
+      margin-top: .65rem; font-size: .73rem; color: var(--green);
+      display: flex; align-items: center; justify-content: center; gap: .4rem;
+    }
+    .pc-pnote::before { content: ''; display: inline-block; width: 10px; height: 2px; background: var(--green); }
+
+    /* CTA */
+    .pc-cta { padding: 1.4rem 2rem; }
+    .pc-cta .btn-primary { display: flex; justify-content: center; width: 100%; }
+
+    /* Rodapé comparativo */
+    .pc-compare {
+      padding: .85rem 2rem;
+      background: rgba(17,85,192,.05);
+      border-top: 1px solid rgba(17,85,192,.15);
+      font-size: .75rem; color: var(--txt2); text-align: center; line-height: 1.55;
+    }
+    .pc-compare strong { color: var(--txt); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #000410;
+      padding: 2rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      position: relative;
+    }
+    footer::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--green-dk) 0%, rgba(17,85,192,.6) 40%, transparent 90%);
+    }
+    .f-logo { font-family: var(--ft); font-size: 1.5rem; font-weight: 700; letter-spacing: .14em; }
+    .f-logo .g { color: var(--green); }
+    .f-info { font-size: .82rem; color: var(--txt2); text-align: center; line-height: 1.6; }
+    .f-info a { color: var(--green); }
+    .f-copy { font-size: .76rem; color: rgba(122,176,212,.4); text-align: right; }
+
+    /* ── LOADER ── */
+    #loader {
+      position: fixed; inset: 0; z-index: 99999;
+      background: #000818;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      pointer-events: all;
+    }
+    #loader.exit {
+      animation: loaderOut 0.55s cubic-bezier(.76,0,.24,1) forwards;
+    }
+    @keyframes loaderOut { to { transform: translateY(-100%); } }
+
+    /* bg grid (same as hero) */
+    #loader-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(17,85,192,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,85,192,.07) 1px, transparent 1px);
+      background-size: 58px 58px;
+      animation: gridMove 30s linear infinite;
+    }
+    #loader-glow-l {
+      position: absolute; width: 500px; height: 500px;
+      left: -150px; top: 50%; transform: translateY(-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(17,85,192,.14) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    #loader-glow-r {
+      position: absolute; width: 400px; height: 400px;
+      right: -100px; top: 20%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,230,118,.08) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    #loader-inner { position: relative; z-index: 2; text-align: center; }
+
+    /* Logo */
+    #loader-logo {
+      font-family: var(--ft);
+      font-size: clamp(3.5rem, 10vw, 6.5rem);
+      font-weight: 700; letter-spacing: .16em;
+      line-height: 1; margin-bottom: .6rem;
+      display: flex; justify-content: center; align-items: baseline;
+      overflow: hidden;
+    }
+    .ll-ss {
+      color: #fff;
+      opacity: 0; transform: translateX(-70px);
+      animation: llSSin .45s cubic-bezier(.22,1,.36,1) .15s forwards;
+    }
+    .ll-net {
+      color: var(--green);
+      opacity: 0; transform: translateX(70px);
+      animation: llNETin .45s cubic-bezier(.22,1,.36,1) .15s forwards;
+    }
+    @keyframes llSSin  { to { opacity: 1; transform: translateX(0); } }
+    @keyframes llNETin { to { opacity: 1; transform: translateX(0); } }
+
+    /* Flash glow ao se encontrarem */
+    #loader-flash {
+      position: absolute; width: 300px; height: 120px;
+      left: 50%; top: 50%; transform: translate(-50%, -80%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,230,118,.55) 0%, transparent 70%);
+      opacity: 0;
+      animation: flashPop .4s ease-out .6s forwards;
+    }
+    @keyframes flashPop {
+      0%   { opacity: 0;   transform: translate(-50%,-80%) scale(.4); }
+      40%  { opacity: 1;   transform: translate(-50%,-80%) scale(1.1); }
+      100% { opacity: 0;   transform: translate(-50%,-80%) scale(1.4); }
+    }
+
+    /* Linha de fibra */
+    #loader-fiber {
+      height: 2px; width: 0; max-width: 320px; margin: 0 auto .1rem;
+      background: linear-gradient(90deg, transparent, var(--green), var(--green-dk));
+      border-radius: 2px;
+      box-shadow: 0 0 8px rgba(0,230,118,.6);
+      animation: fiberDraw .5s ease-out .72s forwards;
+    }
+    @keyframes fiberDraw { to { width: 320px; } }
+
+    /* Preço */
+    #loader-price {
+      font-family: var(--ft);
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 700; color: var(--txt);
+      opacity: 0; transform: translateY(12px);
+      animation: fadeUp .35s ease-out 1.0s forwards;
+      margin-top: .7rem;
+    }
+    #loader-price strong { color: var(--green); }
+    #loader-price em { font-style: normal; font-size: .6em; color: var(--txt2); }
+
+    /* Tag */
+    #loader-tag {
+      font-size: .78rem; color: var(--txt2); letter-spacing: .1em;
+      text-transform: uppercase;
+      opacity: 0; transform: translateY(8px);
+      animation: fadeUp .3s ease-out 1.22s forwards;
+      margin-top: .5rem;
+    }
+
+    /* Dots de loading */
+    #loader-dots {
+      display: flex; justify-content: center; gap: .4rem; margin-top: 1.4rem;
+      opacity: 0;
+      animation: fadeUp .3s ease-out 1.35s forwards;
+    }
+    .ld { width: 5px; height: 5px; border-radius: 50%; background: var(--green); opacity: .25; }
+    .ld:nth-child(1) { animation: ldPulse 1s ease-in-out 1.4s infinite; }
+    .ld:nth-child(2) { animation: ldPulse 1s ease-in-out 1.55s infinite; }
+    .ld:nth-child(3) { animation: ldPulse 1s ease-in-out 1.7s infinite; }
+    @keyframes ldPulse { 0%,100%{opacity:.2} 50%{opacity:1} }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div id="loader-grid"></div>
+  <div id="loader-glow-l"></div>
+  <div id="loader-glow-r"></div>
+  <div id="loader-flash"></div>
+  <div id="loader-inner">
+    <div id="loader-logo">
+      <span class="ll-ss">SS</span><span class="ll-net">NET</span>
+    </div>
+    <div id="loader-fiber"></div>
+    <div id="loader-price">A partir de <strong>R$&nbsp;89,90</strong><em>/mês</em></div>
+    <div id="loader-tag">Fibra Óptica · Paulínia &amp; Sumaré</div>
+    <div id="loader-dots">
+      <div class="ld"></div><div class="ld"></div><div class="ld"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo"><span class="w">SS</span><span class="g">NET</span></div>
+  <a class="btn-wa" href="https://wa.me/5519989312707?text=Ol%C3%A1!+Quero+conhecer+os+planos+de+internet+fibra+da+SSNET." target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.117 1.534 5.847L.057 23.03a1 1 0 001.225 1.225l5.198-1.48A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.676-.524-5.192-1.437l-.372-.222-3.863 1.1 1.1-3.85-.234-.384A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    (19) 98931-2707
+  </a>
+</nav>
+
+
+
+<!-- PLANOS -->
+<section id="planos">
+  <canvas id="planos-canvas"></canvas>
+  <div class="planos-inner">
+
+    <div class="plan-card">
+
+      <!-- Cabeçalho -->
+      <div class="pc-head">
+        <div class="pc-headline">
+          <span class="pc-mega">500</span>
+          <span class="pc-unit">MEGA</span>
+        </div>
+        <div class="pc-sub">Fibra Óptica &nbsp;·&nbsp; Dedicada &nbsp;·&nbsp; Paulínia &amp; Sumaré</div>
+      </div>
+
+      <!-- Features -->
+      <div class="pc-feats">
+        <div class="pc-feat hi">
+          <i class="pc-fi">↓</i>
+          <span><strong>500 Mbps</strong> de download</span>
+        </div>
+        <div class="pc-feat hi">
+          <i class="pc-fi">↑</i>
+          <span><strong>500 Mbps</strong> de upload</span>
+        </div>
+        <div class="pc-feat">
+          <i class="pc-fi">◈</i>
+          <span>Wi-Fi incluso na instalação</span>
+        </div>
+        <div class="pc-feat">
+          <i class="pc-fi">◈</i>
+          <span>Suporte direto via <strong>WhatsApp</strong> — sem 0800</span>
+        </div>
+        <div class="pc-feat">
+          <i class="pc-fi">◈</i>
+          <span>Técnico local que <strong>conhece seu bairro</strong></span>
+        </div>
+        <div class="pc-feat">
+          <i class="pc-fi">◈</i>
+          <span>Instalação <strong>sem custo adicional</strong></span>
+        </div>
+      </div>
+
+      <!-- Preço -->
+      <div class="pc-price">
+        <span class="pc-pfrom">a partir de</span>
+        <div class="pc-pval">R$&nbsp;89<em>,90</em></div>
+        <span class="pc-pmo">/mês</span>
+        <div class="pc-pnote">Preço fixo — sem reajuste após 6 meses</div>
+      </div>
+
+      <!-- CTA -->
+      <div class="pc-cta">
+        <a class="btn-primary" href="#quiz">Quero esse plano →</a>
+      </div>
+
+      <!-- Comparação -->
+      <div class="pc-compare">
+        Desktop cobra <strong>R$89,99</strong> por <strong>200 Mbps compartilhados</strong> — mesma conta, 2,5× mais velocidade e dedicada.
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="quiz-wrap">
+    <div class="quiz-tag">Fale com a gente</div>
+    <h2 class="quiz-title">Onde você mora<br>e como usa a internet?</h2>
+    <p class="quiz-sub">Três cliques e você já tá em contato direto com a SSNET — sem formulário, sem espera.</p>
+
+    <div class="quiz-steps">
+      <div class="qs active" id="qs1"><div class="qs-num">1</div> Cidade</div>
+      <div class="qs-sep"></div>
+      <div class="qs" id="qs2"><div class="qs-num">2</div> Bairro</div>
+      <div class="qs-sep"></div>
+      <div class="qs" id="qs3"><div class="qs-num">3</div> Uso</div>
+    </div>
+
+    <div class="quiz-panel">
+
+      <!-- Passo 1: Cidade -->
+      <div id="qp1">
+        <div class="quiz-question">Qual é a sua cidade?</div>
+        <div class="chip-grid">
+          <div class="chip" onclick="qSelect(1,'cidade','Paulínia',this)">Paulínia</div>
+          <div class="chip" onclick="qSelect(1,'cidade','Sumaré',this)">Sumaré</div>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn-next" id="qnext1" disabled onclick="qGoTo(2)">Próximo →</button>
+        </div>
+      </div>
+
+      <!-- Passo 2: Bairro -->
+      <div id="qp2" style="display:none;">
+        <div class="quiz-question">Qual é o seu bairro?</div>
+        <div class="chip-grid" id="bairro-chips"></div>
+        <div class="quiz-nav">
+          <button class="btn-back" onclick="qGoTo(1)">← Voltar</button>
+          <button class="btn-next" id="qnext2" disabled onclick="qGoTo(3)">Próximo →</button>
+        </div>
+      </div>
+
+      <!-- Passo 3: Uso -->
+      <div id="qp3" style="display:none;">
+        <div class="quiz-question">Como você vai usar a internet?</div>
+        <div class="chip-grid">
+          <div class="chip" onclick="qSelect(3,'uso','uso doméstico',this)">Casa / Família</div>
+          <div class="chip" onclick="qSelect(3,'uso','home office',this)">Home Office</div>
+          <div class="chip" onclick="qSelect(3,'uso','empresa',this)">Empresa</div>
+          <div class="chip" onclick="qSelect(3,'uso','streaming e jogos',this)">Streaming / Jogos</div>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn-back" onclick="qGoTo(2)">← Voltar</button>
+          <button class="btn-next" id="qnext3" disabled onclick="qGoTo(4)">Ver planos →</button>
+        </div>
+      </div>
+
+      <!-- Passo 4: Resultado -->
+      <div id="qp4" style="display:none;">
+        <div class="quiz-summary" id="quiz-summary"></div>
+        <div style="text-align:center;">
+          <a class="btn-wa-quiz" id="quiz-wa-btn" href="#" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.117 1.534 5.847L.057 23.03a1 1 0 001.225 1.225l5.198-1.48A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.896 0-3.676-.524-5.192-1.437l-.372-.222-3.863 1.1 1.1-3.85-.234-.384A9.956 9.956 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Falar no WhatsApp
+          </a>
+          <p style="margin-top:.9rem;font-size:.75rem;color:var(--txt2);line-height:1.6;">
+            Você fala <strong style="color:var(--txt)">direto com o suporte</strong> — sem robô, sem ticket.<br>
+            Atendimento humano, de Paulínia pra você.
+          </p>
+          <div style="margin-top:.7rem;">
+            <button class="btn-back" onclick="qReset()">← Refazer</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- .quiz-panel -->
+  </div>
+</section>
+
+<!-- MAPA DE COBERTURA (Three.js) -->
+<section id="cobertura">
+  <canvas id="three-canvas"></canvas>
+  <canvas id="label-canvas"></canvas>
+
+  <div class="map-overlay">
+    <div class="map-tag">Cobertura ativa</div>
+    <div class="map-title">Clique no seu bairro</div>
+    <div style="font-size:.78rem;color:var(--txt2);margin-top:.4rem;letter-spacing:.04em;">
+      e fale direto com o suporte — sem intermediários
+    </div>
+  </div>
+
+  <div class="map-hint">Torres = cidades &nbsp;·&nbsp; Prédios = bairros atendidos</div>
+</section>
+
+<!-- TOOLTIP -->
+<div id="tooltip">
+  <div class="tt-name" id="tt-name"></div>
+  <div class="tt-city" id="tt-city"></div>
+  <div class="tt-cta">Clique para falar no WhatsApp →</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo"><span class="w">SS</span><span class="g">NET</span></div>
+  <div class="f-info">
+    Suporte direto&nbsp;&nbsp;·&nbsp;&nbsp;
+    <a href="https://wa.me/5519989312707" target="_blank">(19) 98931-2707</a>&nbsp;&nbsp;·&nbsp;&nbsp;
+    Paulínia e Sumaré, SP
+  </div>
+  <div class="f-copy">Fibra dedicada · © 2026 SSNET</div>
+</footer>
+
+<script>
+(function () {
+  const _bairros = {
+    'Paulínia': ['Betel','Bom Retiro','João Aranha','Parque da Represa','Saltinho','São José','Outro bairro'],
+    'Sumaré':   ['Maria Antônia','Outro bairro']
+  };
+  const state = { cidade: null, bairro: null, uso: null };
+
+  window.qSelect = function (step, key, val, el) {
+    state[key] = val;
+    el.closest('.chip-grid').querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    if (step === 1) {
+      document.getElementById('qnext1').disabled = false;
+      // repopulate bairros
+      const grid = document.getElementById('bairro-chips');
+      grid.innerHTML = '';
+      state.bairro = null;
+      document.getElementById('qnext2').disabled = true;
+      (_bairros[val] || []).forEach(b => {
+        const d = document.createElement('div');
+        d.className = 'chip';
+        d.textContent = b;
+        d.onclick = () => qSelect(2, 'bairro', b, d);
+        grid.appendChild(d);
+      });
+    }
+    if (step === 2) document.getElementById('qnext2').disabled = false;
+    if (step === 3) document.getElementById('qnext3').disabled = false;
+  };
+
+  window.qGoTo = function (step) {
+    [1,2,3,4].forEach(n => {
+      document.getElementById('qp' + n).style.display = n === step ? '' : 'none';
+    });
+    ['qs1','qs2','qs3'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      el.classList.remove('active','done');
+      if (i + 1 === step)       el.classList.add('active');
+      else if (i + 1 < step)    el.classList.add('done');
+    });
+    if (step === 4) _buildResult();
+  };
+
+  function _buildResult() {
+    const isOutro = state.bairro === 'Outro bairro';
+    const bairroTxt = isOutro ? `em ${state.cidade}` : `no ${state.bairro}, em ${state.cidade}`;
+    const locLabel  = isOutro ? `Outro bairro em ${state.cidade}` : `${state.bairro} — ${state.cidade}`;
+    const msg = `Olá! Moro ${bairroTxt}. Uso para ${state.uso.toLowerCase()}. Quero conhecer os planos e valores disponíveis!`;
+    document.getElementById('quiz-summary').innerHTML =
+      `📍 <strong>${locLabel}</strong><br>` +
+      `💡 ${state.uso}<br><br>` +
+      `<em style="color:var(--txt2);font-size:.85rem">"${msg}"</em>`;
+    document.getElementById('quiz-wa-btn').href =
+      `https://wa.me/5519989312707?text=${encodeURIComponent(msg)}`;
+  }
+
+  window.qReset = function () {
+    state.cidade = state.bairro = state.uso = null;
+    document.querySelectorAll('#quiz .chip').forEach(c => c.classList.remove('selected'));
+    ['qnext1','qnext2','qnext3'].forEach(id => document.getElementById(id).disabled = true);
+    qGoTo(1);
+  };
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ── CITIES DATA ── */
+  // Paulínia hub em (1.5, 0), bairros em círculo raio 3.8 — 60° cada, sem sobreposição
+  const _hx = 1.5, _hz = 0.0, _r = 3.8;
+  function _p(deg) {
+    const rad = deg * Math.PI / 180;
+    return { x: _hx + _r * Math.sin(rad), z: _hz - _r * Math.cos(rad) };
+  }
+  const CITIES = [
+    { name: 'Paulínia',          city: 'Paulínia',  x:  _hx,        z:  _hz,        type: 'hub',    color: 0x00e676, size: 0.82 },
+    { name: 'Sumaré',            city: 'Sumaré',    x: -6.5,        z:  0.0,        type: 'main',   color: 0x00c853, size: 0.68 },
+    { name: 'Betel',             city: 'Paulínia',  ..._p(  0),                      type: 'bairro', color: 0x00e676, size: 0.46 },
+    { name: 'João Aranha',       city: 'Paulínia',  ..._p( 60),                      type: 'bairro', color: 0x00e676, size: 0.46 },
+    { name: 'São José',          city: 'Paulínia',  ..._p(120),                      type: 'bairro', color: 0x00e676, size: 0.46 },
+    { name: 'Bom Retiro',        city: 'Paulínia',  ..._p(180),                      type: 'bairro', color: 0x00e676, size: 0.46 },
+    { name: 'Parque da Represa', city: 'Paulínia',  ..._p(240),                      type: 'bairro', color: 0x00e676, size: 0.46 },
+    { name: 'Saltinho',          city: 'Paulínia',  ..._p(300),                      type: 'bairro', color: 0x00e676, size: 0.46 },
+    { name: 'Maria Antônia',     city: 'Sumaré',    x: -6.5,        z: -3.2,        type: 'bairro', color: 0x00c853, size: 0.46 },
+  ];
+  const CONNS = [
+    [0,1], [0,2],[0,3],[0,4],[0,5],[0,6],[0,7], [1,8]
+  ];
+
+  function waLink(c) {
+    const loc = (c.type === 'hub' || c.type === 'main')
+      ? `em ${c.name}`
+      : `no ${c.name}, em ${c.city}`;
+    const txt = encodeURIComponent(`Olá! Moro ${loc}. Quero conhecer os planos de internet fibra da SSNET.`);
+    return `https://wa.me/5519989312707?text=${txt}`;
+  }
+
+  /* ── THREE.JS SETUP ── */
+  const cvs = document.getElementById('three-canvas');
+  const sec = document.getElementById('cobertura');
+  const renderer = new THREE.WebGLRenderer({ canvas: cvs, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000d24, 1);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x000d24, 0.018);
+
+  const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 120);
+  camera.position.set(0, 12, 18);
+  camera.lookAt(0, 0, 0);
+
+  /* ── LIGHTS ── */
+  scene.add(new THREE.AmbientLight(0x1a4080, 2.2));
+  const dLight = new THREE.DirectionalLight(0x4499ff, 1.4);
+  dLight.position.set(5, 12, 5);
+  scene.add(dLight);
+  const dLight2 = new THREE.DirectionalLight(0x00e676, 0.6);
+  dLight2.position.set(-6, 8, -4);
+  scene.add(dLight2);
+
+  /* ── GROUND ── */
+  const groundGeo = new THREE.PlaneGeometry(55, 55);
+  const groundMat = new THREE.MeshPhongMaterial({
+    color: 0x000e22,
+    emissive: 0x000810,
+    transparent: true,
+    opacity: 0.92
+  });
+  const ground = new THREE.Mesh(groundGeo, groundMat);
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = -0.06;
+  scene.add(ground);
+
+  /* ── GRID ── */
+  const grid = new THREE.GridHelper(40, 40, 0x1a4a9a, 0x0a2550);
+  grid.position.y = -0.02;
+  scene.add(grid);
+
+  /* ── PARTICLES ── */
+  const pCount = 1400;
+  const pPos = new Float32Array(pCount * 3);
+  for (let i = 0; i < pCount * 3; i += 3) {
+    pPos[i]   = (Math.random() - 0.5) * 80;
+    pPos[i+1] = Math.random() * 28 - 2;
+    pPos[i+2] = (Math.random() - 0.5) * 80;
+  }
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x4488dd, size: 0.1, transparent: true, opacity: 0.75 }));
+  scene.add(particles);
+
+  /* ── NODES ── */
+  function addMesh(grp, mesh, px, py, pz, rx, ry, rz) {
+    mesh.position.set(px || 0, py || 0, pz || 0);
+    if (rx !== undefined) mesh.rotation.x = rx;
+    if (ry !== undefined) mesh.rotation.y = ry;
+    if (rz !== undefined) mesh.rotation.z = rz;
+    grp.add(mesh);
+    return mesh;
+  }
+
+  function makeTower(c) {
+    const col = c.color, isHub = c.type === 'hub', h = isHub ? 4.2 : 3.4;
+    const grp = new THREE.Group();
+    grp.position.set(c.x, 0, c.z);
+
+    // shaft
+    const shaft = addMesh(grp,
+      new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.2, h, 8),
+        new THREE.MeshPhongMaterial({ color: col, emissive: col, emissiveIntensity: 0.5, shininess: 80 })),
+      0, h / 2, 0);
+
+    // cross beams
+    [h * 0.28, h * 0.58].forEach(y => {
+      const bw = isHub ? 1.1 : 0.8;
+      addMesh(grp,
+        new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, bw, 6),
+          new THREE.MeshPhongMaterial({ color: col, emissive: col, emissiveIntensity: 0.3 })),
+        0, y, 0, 0, 0, Math.PI / 2);
+      [-1, 1].forEach(s => addMesh(grp,
+        new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, bw * 0.65, 5),
+          new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.5 })),
+        0, y, 0, 0, 0, s * 0.55));
+    });
+
+    // spike
+    addMesh(grp,
+      new THREE.Mesh(new THREE.CylinderGeometry(0.01, 0.04, 0.7, 6),
+        new THREE.MeshBasicMaterial({ color: col })),
+      0, h + 0.35, 0);
+
+    // blink light
+    const blinkMat = new THREE.MeshBasicMaterial({ color: 0xff2200, transparent: true, opacity: 1 });
+    addMesh(grp, new THREE.Mesh(new THREE.SphereGeometry(0.07, 8, 8), blinkMat), 0, h + 0.72, 0);
+
+    // pulse rings
+    const pRings = [];
+    for (let n = 0; n < 3; n++) {
+      const rm = new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0, side: THREE.DoubleSide });
+      const ring = new THREE.Mesh(new THREE.RingGeometry(0.18, 0.24, 32), rm);
+      addMesh(grp, ring, 0, 0.02, 0, -Math.PI / 2);
+      pRings.push({ mesh: ring, mat: rm, phase: n / 3 });
+    }
+
+    // ground glow
+    const glowMat = new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.14, side: THREE.DoubleSide });
+    addMesh(grp, new THREE.Mesh(new THREE.RingGeometry(0.35, 1.1, 32), glowMat), 0, 0.01, 0, -Math.PI / 2);
+
+    scene.add(grp);
+    return { grp, hitMesh: shaft, blinkMat, glowMat, pRings, labelY: h + 1.0 };
+  }
+
+  function makeBuilding(c) {
+    const col = c.color;
+    const seed = Math.abs(Math.round(c.x * 31 + c.z * 17));
+    const rng  = n => (((seed * 1664525 + n * 22695477) >>> 0) / 4294967296);
+
+    const h  = 1.5 + (seed % 6) * 0.2;   // torre principal
+    const h2 = h * (0.45 + rng(1) * 0.25); // ala lateral
+    const grp = new THREE.Group();
+    grp.position.set(c.x, 0, c.z);
+
+    /* ── TEXTURA DE JANELAS ── */
+    const wc = document.createElement('canvas');
+    wc.width = 128; wc.height = 256;
+    const wx = wc.getContext('2d');
+    wx.fillStyle = '#06101e'; wx.fillRect(0, 0, 128, 256);
+    const wCols = 4, wRows = 12, ww = 22, wh = 15, wgx = 9, wgy = 6;
+    for (let r = 0; r < wRows; r++) {
+      for (let cl = 0; cl < wCols; cl++) {
+        const lit  = rng(r * 11 + cl * 7) > 0.28;
+        const warm = rng(r * 3  + cl * 13) > 0.5;
+        wx.fillStyle = lit
+          ? (warm ? '#ffeea0' : (col === 0x00e676 ? '#7fffd4' : '#90d4ff'))
+          : '#0d1a2e';
+        const px = cl * (ww + wgx) + 5;
+        const py = r  * (wh + wgy) + 6;
+        wx.fillRect(px, py, ww, wh);
+        if (lit) {
+          wx.strokeStyle = 'rgba(255,255,255,.12)';
+          wx.lineWidth = 1;
+          wx.strokeRect(px, py, ww, wh);
+        }
+      }
+    }
+    const tex = new THREE.CanvasTexture(wc);
+
+    /* ── CORPO PRINCIPAL ── */
+    const body = addMesh(grp,
+      new THREE.Mesh(new THREE.BoxGeometry(0.62, h, 0.56),
+        new THREE.MeshBasicMaterial({ map: tex })),
+      0, h / 2, 0);
+
+    /* ── ALA LATERAL (prédio menor ao lado) ── */
+    addMesh(grp,
+      new THREE.Mesh(new THREE.BoxGeometry(0.3, h2, 0.4),
+        new THREE.MeshBasicMaterial({ color: 0x081522 })),
+      0.46, h2 / 2, 0);
+
+    /* ── TELHADOS ── */
+    const roofMat = new THREE.MeshBasicMaterial({ color: col });
+    addMesh(grp, new THREE.Mesh(new THREE.BoxGeometry(0.66, 0.055, 0.6),  roofMat), 0,    h + 0.028, 0);
+    addMesh(grp, new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.04,  0.42), roofMat), 0.46, h2 + 0.02, 0);
+
+    /* ── CAIXA D'ÁGUA (detalhe) ── */
+    if (rng(5) > 0.5) {
+      addMesh(grp, new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.18, 8),
+        new THREE.MeshBasicMaterial({ color: 0x0d1e30 })), -0.14, h + 0.14, 0);
+      addMesh(grp, new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.02, 8),
+        new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.5 })), -0.14, h + 0.24, 0);
+    }
+
+    /* ── ANTENA ── */
+    addMesh(grp, new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.42, 5),
+      new THREE.MeshBasicMaterial({ color: col })), 0, h + 0.27, 0);
+
+    /* ── BLINK ── */
+    const blinkMat = new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 1 });
+    addMesh(grp, new THREE.Mesh(new THREE.SphereGeometry(0.042, 8, 8), blinkMat), 0, h + 0.5, 0);
+
+    /* ── GLOW ── */
+    const glowMat = new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: 0.12, side: THREE.DoubleSide });
+    addMesh(grp, new THREE.Mesh(new THREE.RingGeometry(0.28, 0.9, 32), glowMat), 0, 0.01, 0, -Math.PI / 2);
+
+    scene.add(grp);
+    return { grp, hitMesh: body, blinkMat, glowMat, pRings: [], labelY: h + 0.65 };
+  }
+
+  const cityMeshes = [];
+  CITIES.forEach((c, i) => {
+    const isCity = c.type === 'hub' || c.type === 'main';
+    const obj = isCity ? makeTower(c) : makeBuilding(c);
+    cityMeshes.push({ ...obj, city: c, idx: i });
+  });
+
+  /* ── CONNECTIONS ── */
+  const lineMeshes = [];
+  CONNS.forEach(([a, b]) => {
+    const ca = CITIES[a], cb = CITIES[b];
+    const curve = new THREE.QuadraticBezierCurve3(
+      new THREE.Vector3(ca.x, 0, ca.z),
+      new THREE.Vector3((ca.x + cb.x) / 2, 0.8, (ca.z + cb.z) / 2),
+      new THREE.Vector3(cb.x, 0, cb.z)
+    );
+    const pts = curve.getPoints(40);
+    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    const mat = new THREE.LineBasicMaterial({ color: 0x1155c0, transparent: true, opacity: 0.45 });
+    const line = new THREE.Line(geo, mat);
+    scene.add(line);
+    lineMeshes.push({ line, mat });
+
+    // data packets
+    const pkGeo = new THREE.SphereGeometry(0.06, 8, 8);
+    const pkMat = new THREE.MeshBasicMaterial({ color: 0x00e676, transparent: true, opacity: 0.9 });
+    const pkt = new THREE.Mesh(pkGeo, pkMat);
+    scene.add(pkt);
+    lineMeshes.push({ pkt, pkMat, curve, t: Math.random(), speed: 0.004 + Math.random() * 0.004 });
+  });
+
+  /* ── LABEL CANVAS ── */
+  const lCvs = document.getElementById('label-canvas');
+  const lCtx = lCvs.getContext('2d');
+
+  /* ── RAYCASTER ── */
+  const raycaster = new THREE.Raycaster();
+  const mouse2D = new THREE.Vector2();
+  const tooltip = document.getElementById('tooltip');
+  const ttName = document.getElementById('tt-name');
+  const ttCity = document.getElementById('tt-city');
+  let hoveredIdx = -1;
+
+  const nodeMeshes = cityMeshes.map(o => o.hitMesh);
+
+  function getIntersected(event) {
+    const rect = cvs.getBoundingClientRect();
+    mouse2D.x =  ((event.clientX - rect.left)  / rect.width)  * 2 - 1;
+    mouse2D.y = -((event.clientY - rect.top)   / rect.height) * 2 + 1;
+    raycaster.setFromCamera(mouse2D, camera);
+    return raycaster.intersectObjects(nodeMeshes);
+  }
+
+  cvs.addEventListener('mousemove', (e) => {
+    const hits = getIntersected(e);
+    if (hits.length) {
+      const idx = nodeMeshes.indexOf(hits[0].object);
+      hoveredIdx = idx;
+      const c = CITIES[idx];
+      ttName.textContent = c.name;
+      ttCity.textContent = (c.type === 'hub' || c.type === 'main') ? 'Cidade atendida' : `${c.city}`;
+      tooltip.style.display = 'block';
+      tooltip.style.left = (e.clientX + 14) + 'px';
+      tooltip.style.top  = (e.clientY - 14) + 'px';
+      cvs.style.cursor = 'pointer';
+    } else {
+      hoveredIdx = -1;
+      tooltip.style.display = 'none';
+      cvs.style.cursor = 'default';
+    }
+  });
+
+  cvs.addEventListener('mouseleave', () => {
+    tooltip.style.display = 'none';
+    hoveredIdx = -1;
+    cvs.style.cursor = 'default';
+  });
+
+  cvs.addEventListener('click', (e) => {
+    const hits = getIntersected(e);
+    if (hits.length) {
+      const idx = nodeMeshes.indexOf(hits[0].object);
+      window.open(waLink(CITIES[idx]), '_blank');
+    }
+  });
+
+  /* ── RESIZE ── */
+  function onResize() {
+    const w = sec.clientWidth, h = sec.clientHeight;
+    renderer.setSize(w, h);
+    lCvs.width = w; lCvs.height = h;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', onResize);
+  onResize();
+
+  /* ── ANIMATE ── */
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.008;
+
+    // camera orbit
+    camera.position.x = Math.sin(t * 0.12) * 19;
+    camera.position.z = Math.cos(t * 0.12) * 19;
+    camera.position.y = 13 + Math.sin(t * 0.07) * 1.5;
+    camera.lookAt(0, 0, 0);
+
+    // animate nodes
+    cityMeshes.forEach(({ grp, blinkMat, glowMat, pRings, city }, i) => {
+      const isHov = i === hoveredIdx;
+
+      // blink light (towers: red flash, buildings: color pulse)
+      blinkMat.opacity = 0.3 + Math.abs(Math.sin(t * 2.8 + i * 0.9)) * 0.7;
+
+      // ground glow
+      glowMat.opacity = isHov ? 0.4 : 0.1 + Math.sin(t * 1.4 + i) * 0.05 + 0.05;
+
+      // signal rings expand outward from base (towers only)
+      pRings.forEach(({ mesh, mat: rm, phase }) => {
+        const p = ((t * 0.5 + phase) % 1);
+        const scale = 1 + p * 14;
+        mesh.scale.set(scale, 1, scale);
+        rm.opacity = isHov ? (1 - p) * 0.7 : (1 - p) * 0.3;
+      });
+
+      // hover: scale whole object up slightly
+      const sc = isHov ? 1.12 : 1.0;
+      grp.scale.set(sc, sc, sc);
+    });
+
+    // data packets
+    lineMeshes.forEach(o => {
+      if (!o.curve) return;
+      o.t = (o.t + o.speed) % 1;
+      const pt = o.curve.getPoint(o.t);
+      o.pkt.position.copy(pt);
+      o.pkMat.opacity = Math.sin(o.t * Math.PI) * 0.9;
+    });
+
+    // particles slow drift
+    particles.rotation.y = t * 0.008;
+
+    renderer.render(scene, camera);
+
+    // labels
+    lCtx.clearRect(0, 0, lCvs.width, lCvs.height);
+    const w2 = lCvs.width / 2, h2 = lCvs.height / 2;
+    CITIES.forEach((c, i) => {
+      const lY = cityMeshes[i] ? cityMeshes[i].labelY : 1.5;
+      const pos = new THREE.Vector3(c.x, lY, c.z);
+      pos.project(camera);
+      const sx = pos.x * w2 + w2;
+      const sy = -pos.y * h2 + h2;
+      if (pos.z > 1) return;
+      const isHov = i === hoveredIdx;
+      const isHub = c.type === 'hub' || c.type === 'main';
+      const fs   = isHub ? (isHov ? 16 : 14) : (isHov ? 14 : 12);
+      const fw   = isHub ? '700' : '600';
+      const ff   = isHub ? 'Rajdhani, sans-serif' : 'DM Sans, sans-serif';
+      const col  = isHov ? '#ffffff' : (isHub ? '#00e676' : '#aad4f0');
+
+      lCtx.save();
+      lCtx.font = `${fw} ${fs}px ${ff}`;
+      const tw = lCtx.measureText(c.name).width;
+      const ph = fs + 8, pw = tw + 20, pr = 5;
+      const bx = sx - pw / 2, by = sy - ph + 2;
+
+      // pill background
+      lCtx.beginPath();
+      lCtx.moveTo(bx + pr, by);
+      lCtx.lineTo(bx + pw - pr, by);
+      lCtx.quadraticCurveTo(bx + pw, by, bx + pw, by + pr);
+      lCtx.lineTo(bx + pw, by + ph - pr);
+      lCtx.quadraticCurveTo(bx + pw, by + ph, bx + pw - pr, by + ph);
+      lCtx.lineTo(bx + pr, by + ph);
+      lCtx.quadraticCurveTo(bx, by + ph, bx, by + ph - pr);
+      lCtx.lineTo(bx, by + pr);
+      lCtx.quadraticCurveTo(bx, by, bx + pr, by);
+      lCtx.closePath();
+      lCtx.fillStyle = isHov ? 'rgba(0,20,50,.92)' : 'rgba(0,10,28,.78)';
+      lCtx.fill();
+      lCtx.strokeStyle = isHov ? 'rgba(0,230,118,.7)' : 'rgba(17,85,192,.45)';
+      lCtx.lineWidth = 1;
+      lCtx.stroke();
+
+      // text
+      lCtx.fillStyle = col;
+      lCtx.textAlign = 'center';
+      lCtx.textBaseline = 'middle';
+      lCtx.fillText(c.name, sx, by + ph / 2);
+      lCtx.restore();
+    });
+  }
+  animate();
+})();
+</script>
+<script>
+/* ── PLANOS — DATA TRANSMISSION BG ── */
+(function () {
+  const cvs = document.getElementById('planos-canvas');
+  const sec = document.getElementById('planos');
+
+  const renderer = new THREE.WebGLRenderer({ canvas: cvs, antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000818, 1);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x000818, 0.04);
+
+  const camera = new THREE.PerspectiveCamera(58, 1, 0.1, 80);
+  camera.position.set(0, 3, 20);
+  camera.lookAt(0, 0, 0);
+
+  /* Luz ambiente suave */
+  scene.add(new THREE.AmbientLight(0x0a1a40, 3));
+
+  /* ── NODOS ── */
+  const NODE_POSITIONS = [];
+  const nodeData = [
+    [-8, 2, -2], [-5, -3, 1], [-2, 4, -3], [0, -1, 2],
+    [3, 3, -1],  [6, -2, 0], [8, 1, -3],  [-6, 1, 3],
+    [1, -4, -1], [4, -3, 2], [-3, -2, -2],[7, 3, 1],
+    [-9, -1, 0], [2, 5, 1]
+  ];
+
+  const nodeMeshes = [];
+  nodeData.forEach(([x, y, z]) => {
+    const v = new THREE.Vector3(x, y, z);
+    NODE_POSITIONS.push(v);
+    const geo = new THREE.SphereGeometry(0.14, 8, 8);
+    const isHub = Math.random() > 0.65;
+    const mat = new THREE.MeshBasicMaterial({
+      color: isHub ? 0x00e676 : 0x1a5abf,
+      transparent: true, opacity: isHub ? 0.9 : 0.7
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.copy(v);
+    scene.add(mesh);
+    nodeMeshes.push({ mesh, isHub, baseOpacity: isHub ? 0.9 : 0.7, phase: Math.random() * Math.PI * 2 });
+  });
+
+  /* ── CONEXÕES + PACOTES ── */
+  const PAIRS = [
+    [0,3],[1,3],[2,3],[3,4],[3,5],[4,6],[5,6],[0,7],[7,1],
+    [4,9],[5,9],[6,11],[8,3],[8,9],[10,1],[10,2],[11,6],[12,0],[13,4],[13,2]
+  ];
+
+  const packets = [];
+
+  PAIRS.forEach(([ai, bi]) => {
+    const posA = NODE_POSITIONS[ai];
+    const posB = NODE_POSITIONS[bi];
+    const ctrl = new THREE.Vector3(
+      (posA.x + posB.x) / 2 + (Math.random() - 0.5) * 2,
+      (posA.y + posB.y) / 2 + (Math.random() - 0.5) * 2,
+      (posA.z + posB.z) / 2 + (Math.random() - 0.5) * 1.5
+    );
+    const curve = new THREE.QuadraticBezierCurve3(posA, ctrl, posB);
+
+    /* Linha da fibra */
+    const pts = curve.getPoints(40);
+    const lineGeo = new THREE.BufferGeometry().setFromPoints(pts);
+    const lineMat = new THREE.LineBasicMaterial({ color: 0x0d2a5e, transparent: true, opacity: 0.45 });
+    scene.add(new THREE.Line(lineGeo, lineMat));
+
+    /* 1-2 pacotes por conexão */
+    const count = Math.random() > 0.4 ? 2 : 1;
+    for (let k = 0; k < count; k++) {
+      const pGeo = new THREE.SphereGeometry(0.07, 6, 6);
+      const isGreen = Math.random() > 0.35;
+      const pMat = new THREE.MeshBasicMaterial({
+        color: isGreen ? 0x00e676 : 0x4499ff,
+        transparent: true, opacity: 0.95
+      });
+      const pkt = new THREE.Mesh(pGeo, pMat);
+      scene.add(pkt);
+
+      /* Trail — 3 esferas menores atrás do pacote */
+      const trail = [];
+      for (let t = 0; t < 3; t++) {
+        const tGeo = new THREE.SphereGeometry(0.04 - t * 0.01, 4, 4);
+        const tMat = new THREE.MeshBasicMaterial({ color: isGreen ? 0x00e676 : 0x4499ff, transparent: true, opacity: 0.4 - t * 0.12 });
+        const tm = new THREE.Mesh(tGeo, tMat);
+        scene.add(tm);
+        trail.push(tm);
+      }
+
+      packets.push({
+        curve,
+        pkt,
+        trail,
+        t: Math.random(),
+        speed: 0.0025 + Math.random() * 0.005,
+        reverse: Math.random() > 0.5
+      });
+    }
+  });
+
+  /* ── PARTÍCULAS FLUTUANTES ── */
+  const pCount = 600;
+  const pArr = new Float32Array(pCount * 3);
+  for (let i = 0; i < pCount * 3; i += 3) {
+    pArr[i]   = (Math.random() - 0.5) * 30;
+    pArr[i+1] = (Math.random() - 0.5) * 18;
+    pArr[i+2] = (Math.random() - 0.5) * 20;
+  }
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pArr, 3));
+  scene.add(new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x223a7a, size: 0.08, transparent: true, opacity: 0.7 })));
+
+  /* ── RESIZE ── */
+  function resize() {
+    const w = sec.clientWidth, h = sec.clientHeight;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* ── ANIMATE ── */
+  (function loop() {
+    requestAnimationFrame(loop);
+    const now = Date.now() * 0.001;
+
+    /* Camera drift lento */
+    camera.position.x = Math.sin(now * 0.12) * 2.5;
+    camera.position.y = 3 + Math.cos(now * 0.09) * 1.2;
+    camera.lookAt(0, 0, 0);
+
+    /* Pulsa nodos */
+    nodeMeshes.forEach(n => {
+      n.mesh.material.opacity = n.baseOpacity * (0.7 + 0.3 * Math.sin(now * 2.2 + n.phase));
+    });
+
+    /* Move pacotes + trail */
+    packets.forEach(p => {
+      p.t = (p.t + p.speed) % 1;
+      const tt = p.reverse ? 1 - p.t : p.t;
+      p.pkt.position.copy(p.curve.getPoint(tt));
+      p.trail.forEach((tm, i) => {
+        const trailT = Math.max(0, tt - (i + 1) * 0.025);
+        tm.position.copy(p.curve.getPoint(p.reverse ? trailT : Math.min(1, trailT)));
+      });
+    });
+
+    renderer.render(scene, camera);
+  })();
+})();
+</script>
+<script>
+(function () {
+  document.body.style.overflow = 'hidden';
+  var loader = document.getElementById('loader');
+  // Sai depois de 2s (animações terminam em ~1.5s, 500ms de pausa)
+  function hideLoader() {
+    loader.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  setTimeout(function () {
+    loader.classList.add('exit');
+    // fallback: força saída após 800ms caso animationend não dispare (mobile)
+    var fallback = setTimeout(hideLoader, 800);
+    loader.addEventListener('animationend', function () {
+      clearTimeout(fallback);
+      hideLoader();
+    }, { once: true });
+  }, 2000);
+})();
+</script>
+</body>
+</html>
